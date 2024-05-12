@@ -24,7 +24,7 @@ export function SignUpModal({ open, onClose }: Props) {
 
   function onSubmit(data: FieldValues) {
     axios
-      .post("http://127.0.0.1:8080/auth/signup", data)
+      .post(`http://${window.location.hostname}:8080/auth/signup`, data)
       .then((res) => console.log(res))
       .catch((err) => console.error("axios error: ", err))
       .finally(() => console.log("submitted"));
