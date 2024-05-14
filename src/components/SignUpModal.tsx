@@ -40,11 +40,11 @@ export function SignUpModal({ open, onClose }: Props) {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" {...(register("email"), { required: true })} />
+              <Input type="email" {...register("email")} />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Password</FormLabel>
-              <Input type="password" {...(register("password"), { required: true, minLength: 8 })} />
+              <Input type="password" {...register("password")} />
             </FormControl>
           </ModalBody>
           <ModalFooter>
