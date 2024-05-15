@@ -31,7 +31,7 @@ interface ErrorResponse {
 }
 
 function SignInModal({ open, onClose }: Props) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
 
   function handleResponse(res: AxiosResponse<Response>) {
@@ -39,6 +39,8 @@ function SignInModal({ open, onClose }: Props) {
     console.log(res.data.auth);
 
     setErrorMessage("");
+    reset();
+    // TO-DO
   }
 
   function handleErrorResponse(error: AxiosError<ErrorResponse>) {
@@ -85,7 +87,15 @@ function SignInModal({ open, onClose }: Props) {
               <Button type="submit" colorScheme="blue" mr={3}>
                 Sign in
               </Button>
-              <Button onClick={onClose}>Close</Button>
+              <Button
+                onClick={() => {
+                  setErrorMessage("");
+                  reset();
+                  onClose();
+                }}
+              >
+                Close
+              </Button>
             </ModalFooter>
           </form>
         </ModalContent>
