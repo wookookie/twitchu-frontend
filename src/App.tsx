@@ -1,5 +1,5 @@
-import { Button } from "@chakra-ui/button";
-import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import { ChatLayout } from "./components/chat/ChatLayout";
 import NavBar from "./components/NavBar";
 import SideMenu from "./components/SideMenu";
 
@@ -9,13 +9,9 @@ function App() {
       <SideMenu width="240px" />
       <Box width="100%">
         <NavBar />
-        <VStack>
-          <Heading as="h1">Welcome to Twitchu!</Heading>
-          <HStack marginTop={5}>
-            <Button colorScheme="blue">Sign in</Button>
-            <Button colorScheme="blue">Sign up</Button>
-          </HStack>
-        </VStack>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <ChatLayout />
+        </div>
       </Box>
     </Flex>
   );
