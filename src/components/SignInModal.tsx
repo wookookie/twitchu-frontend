@@ -16,6 +16,9 @@ import {
 } from "@chakra-ui/react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
+// 요청 시 자격증명 포함 설정
+axios.defaults.withCredentials = true;
+
 interface Props {
   open: boolean;
   onClose: () => void;
