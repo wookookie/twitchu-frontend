@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { websocket } from "../../websocket";
 
 const Outline = styled.div`
   display: flex;
@@ -8,5 +10,13 @@ const Outline = styled.div`
 `;
 
 export function ChatContents() {
-  return <Outline>contents</Outline>;
+  const [message, setMessage] = useState<string>("");
+
+  useEffect(() => {
+    websocket.on("chat", (chat) => {
+      setMessage(chat.message);
+    });
+  }, []);
+
+  return <Outline>{message && message}</Outline>;
 }
