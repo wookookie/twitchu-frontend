@@ -14,10 +14,8 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import axios, { AxiosError, AxiosResponse } from "axios";
-
-// 요청 시 자격증명 포함 설정
-axios.defaults.withCredentials = true;
+import { AxiosError, AxiosResponse } from "axios";
+import api from "../services/api";
 
 interface Props {
   open: boolean;
@@ -57,8 +55,8 @@ function SignInModal({ open, onClose }: Props) {
   }
 
   function onSubmit(data: FieldValues) {
-    axios
-      .post(`http://${window.location.hostname}:8080/auth/signin`, data)
+    api
+      .post("/auth/signin", data)
       .then((res) => handleResponse(res))
       .catch((error) => handleErrorResponse(error));
   }

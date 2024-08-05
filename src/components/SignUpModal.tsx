@@ -14,7 +14,8 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import api from "../services/api";
 
 interface Props {
   open: boolean;
@@ -54,8 +55,8 @@ export function SignUpModal({ open, onClose }: Props) {
   }
 
   function onSubmit(data: FieldValues) {
-    axios
-      .post(`http://${window.location.hostname}:8080/auth/signup`, data)
+    api
+      .post("/auth/signup", data)
       .then((res) => handleResponse(res))
       .catch((error) => handleErrorResponse(error));
   }

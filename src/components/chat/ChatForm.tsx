@@ -1,6 +1,6 @@
-import axios from "axios";
 import { FormEvent, useRef } from "react";
 import { Button, FormControl, Input } from "@chakra-ui/react";
+import api from "../../services/api";
 
 export function ChatForm() {
   const messageRef = useRef<HTMLInputElement>(null);
@@ -15,8 +15,8 @@ export function ChatForm() {
       return;
     }
 
-    axios
-      .post(`http://${window.location.hostname}:8080/chat`, { message: message })
+    api
+      .post("/chat", { message: message })
       .then((res) => console.log(res.data))
       .catch((error) => console.error("Message sending error: ", error));
   }
