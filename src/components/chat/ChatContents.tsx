@@ -14,10 +14,13 @@ const Outline = styled.div`
 `;
 
 export function ChatContents() {
+  const [username, setUserName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
+    // TO-DO: 수신 데이터에 interface 적용
     websocket.on("chat", (chat) => {
+      setUserName(chat.user);
       setMessage(chat.message);
     });
   }, []);
@@ -26,7 +29,7 @@ export function ChatContents() {
     <Outline>
       {message && (
         <div style={{ padding: "10px 10px" }}>
-          <ChatBubble>{message}</ChatBubble>
+          <ChatBubble username={username}>{message}</ChatBubble>
         </div>
       )}
     </Outline>

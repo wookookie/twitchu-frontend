@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface Props {
+  username: string;
   children: ReactNode;
 }
 
@@ -15,10 +16,17 @@ const Bubble = styled.div`
   background-color: #fed7e2;
 `;
 
-export function ChatBubble({ children }: Props) {
+const UserName = styled.p`
+  color: #cbd5e0;
+`;
+
+export function ChatBubble({ username, children }: Props) {
   return (
-    <Bubble>
-      <div>{children}</div>
-    </Bubble>
+    <div>
+      <UserName>{username}</UserName>
+      <Bubble>
+        <div>{children}</div>
+      </Bubble>
+    </div>
   );
 }
