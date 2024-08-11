@@ -6,7 +6,7 @@ import { websocket } from "../../websocket";
 
 const Outline = styled.div`
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   border-width: 1px;
   border-radius: 0.5rem;
   min-height: 400px;
@@ -15,23 +15,27 @@ const Outline = styled.div`
 `;
 
 export function ChatContents() {
-  const [username, setUserName] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+  const [chats, setChats] = useState<Chat[]>([]);
+
+  function handleReceiveChat(chat: Chat) {
+    setChats((prevChats) => [...prevChats, { user: chat.user, message: chat.message }]);
+  }
 
   useEffect(() => {
-    websocket.on("chat", (chat: Chat) => {
-      setUserName(chat.user);
-      setMessage(chat.message);
-    });
+    websocket.on("chat", handleReceiveChat);
+
+    return () => {
+      websocket.removeListener("chat", handleReceiveChat);
+    };
   }, []);
 
   return (
     <Outline>
-      {message && (
-        <div style={{ padding: "10px 10px" }}>
-          <ChatBubble username={username}>{message}</ChatBubble>
+      {chats.map((chat, index) => (
+        <div key={index} style={{ padding: "10px 10px" }}>
+          <ChatBubble username={chat.user}>{chat.message}</ChatBubble>
         </div>
-      )}
+      ))}
     </Outline>
   );
 }
