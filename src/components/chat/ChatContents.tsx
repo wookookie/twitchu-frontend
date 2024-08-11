@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ChatBubble } from "./ChatBubble";
+import { Chat } from "../../interfaces/chat.interface";
 import { websocket } from "../../websocket";
 
 const Outline = styled.div`
@@ -18,8 +19,7 @@ export function ChatContents() {
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
-    // TO-DO: 수신 데이터에 interface 적용
-    websocket.on("chat", (chat) => {
+    websocket.on("chat", (chat: Chat) => {
       setUserName(chat.user);
       setMessage(chat.message);
     });
